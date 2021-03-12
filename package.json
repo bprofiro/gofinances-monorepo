@@ -1,5 +1,5 @@
 {
-  "name": "omnirepo",
+  "name": "gofinances",
   "private": true,
   "version": "1.0.0",
   "main": "index.js",
@@ -13,7 +13,7 @@
     ]
   },
   "devDependencies": {
-    "@omnirepo/eslint-config": "*",
+    "@gofinances/eslint-config": "*",
     "@types/jest": "^26.0.5",
     "jest": "^26.1.0",
     "ts-jest": "^26.1.3",

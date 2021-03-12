@@ -1,3 +1,3 @@
-const eslintConfig = require('@omnirepo/eslint-config')
+const eslintConfig = require('@gofinances/eslint-config');
 
-module.exports = eslintConfig
+module.exports = eslintConfig;

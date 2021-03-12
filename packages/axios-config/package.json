@@ -1,5 +1,5 @@
 {
-  "name": "@omnirepo/axios-config",
+  "name": "@gofinances/axios-config",
   "version": "1.0.0",
   "main": "src/index.ts",
   "dependencies": {
