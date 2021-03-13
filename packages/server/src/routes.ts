@@ -1,13 +1,29 @@
-import express from 'express'
+import express from 'express';
 
-const routes = express.Router()
+import UserRepository from './repositories/UserRepository';
+import CreateUserService from './services/CreateUserService';
 
-routes.get('/', (request, response) => {
-  return response.json({ message: 'Hello World' })
-})
+const routes = express.Router();
 
-routes.post('/posts', (request, response) => {
-  return response.json({ message: 'New post' })
-})
+const userRepository = new UserRepository();
 
-export default routes
+routes.post('/users', async (request, response) => {
+  const { name, email, password } = request.body;
+
+  try {
+    const createUserService = new CreateUserService(userRepository);
+
+    const user = await createUserService.execute({
+      name,
+      email,
+      password,
+      balance: 0,
+    });
+
+    return response.json(user);
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
+});
+
+export default routes;
