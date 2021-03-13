@@ -50,14 +50,7 @@ const SignUp: React.FunctionComponent = () => {
         abortEarly: false,
       });
 
-      // await api.post('/users', data);
-
       await api.post('/users', data);
-
-      Alert.alert(
-        'Cadastro realizado com sucesso!',
-        'Você já pode fazer login na aplicação.',
-      );
 
       navigation.navigate('SignUpSuccess');
     } catch (err) {
