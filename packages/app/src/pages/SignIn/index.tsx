@@ -6,8 +6,10 @@ import { TextInput, Image, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import * as Yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux';
+import { StoreState } from '../../store/createStore';
+import { authRequest } from '../../store/modules/auth/actions';
 
-import api from '../../services/api';
 import { getValidationErrors } from '../../utils';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -31,6 +33,11 @@ interface SignInRequest {
 }
 
 const SignIn: React.FunctionComponent = () => {
+  const dispatch = useDispatch();
+  const { loadingSignInRequest } = useSelector(
+    (state: StoreState) => state.auth,
+  );
+
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
@@ -51,12 +58,12 @@ const SignIn: React.FunctionComponent = () => {
         abortEarly: false,
       });
 
-      await api.post('/session', data);
+      dispatch(authRequest({ email: data.email, password: data.password }));
 
       Alert.alert(
         'Sucesso',
       );
-      // navigation.navigate('Transaction');
+      navigation.navigate('Listing');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
@@ -71,7 +78,7 @@ const SignIn: React.FunctionComponent = () => {
         'Ocorreu um erro ao fazer cadastro, tente novamente.',
       );
     }
-  }, []);
+  }, [dispatch, navigation]);
 
   return (
     <Container>
@@ -112,7 +119,7 @@ const SignIn: React.FunctionComponent = () => {
               formRef.current?.submitForm();
             }}
           >
-            Entrar
+            {loadingSignInRequest ? 'Carregando...' : 'Entrar'}
           </Button>
         </Form>
 
