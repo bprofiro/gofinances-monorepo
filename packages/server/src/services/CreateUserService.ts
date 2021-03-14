@@ -15,6 +15,7 @@ class CreateUserService {
     password,
   }: Omit<User, 'id'>): Promise<User> {
     const checkIfUserExists = this.userRepository.findByEmail(email);
+
     if (checkIfUserExists) {
       throw new Error('This e-mail is already used');
     }
