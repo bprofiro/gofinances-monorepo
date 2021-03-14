@@ -8,14 +8,17 @@ class UserRepository {
   }
 
   public create({ name, email, password }: Omit<User, 'id'>): User {
-    const user = new User({ name, email, password, balance: 0 });
+    const user = new User({
+      name, email, password, balance: 0,
+    });
+
     this.users.push(user);
 
     return user;
   }
 
   public findByEmail(email: string): User | undefined {
-    const findUserByEmail = this.users.find(user => user.email === email);
+    const findUserByEmail = this.users.find((user) => user.email === email);
 
     return findUserByEmail;
   }

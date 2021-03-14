@@ -1,6 +1,8 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import AppLoading from 'expo-app-loading';
+import { Provider } from 'react-redux';
 
 import {
   Archivo_400Regular,
@@ -13,6 +15,7 @@ import {
 } from '@expo-google-fonts/poppins';
 
 import AppStack from './src/routes/AppStack';
+import { store } from './src/store';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -26,9 +29,9 @@ export default function App() {
     return <AppLoading />;
   }
   return (
-    <>
+    <Provider store={store}>
       <AppStack />
       <StatusBar style="light" />
-    </>
+    </Provider>
   );
 }

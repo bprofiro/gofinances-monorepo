@@ -5,8 +5,10 @@ import { Form } from '@unform/mobile';
 import { TextInput, Image, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux';
+import { StoreState } from '../../store/createStore';
 
-import api from '../../services/api';
+import { signUpRequest } from '../../store/modules/user/actions';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { getValidationErrors } from '../../utils';
@@ -28,6 +30,11 @@ interface SignUpRequest {
 }
 
 const SignUp: React.FunctionComponent = () => {
+  const dispatch = useDispatch();
+  const { loadingSignUpRequest } = useSelector(
+    (state: StoreState) => state.user,
+  );
+
   const formRef = useRef<FormHandles>(null);
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
@@ -50,7 +57,13 @@ const SignUp: React.FunctionComponent = () => {
         abortEarly: false,
       });
 
-      await api.post('/users', data);
+      dispatch(
+        signUpRequest({
+          name: data.name,
+          email: data.email,
+          password: data.password,
+        }),
+      );
 
       navigation.navigate('SignUpSuccess');
     } catch (err) {
@@ -67,7 +80,7 @@ const SignUp: React.FunctionComponent = () => {
         'Ocorreu um erro ao fazer cadastro, tente novamente.',
       );
     }
-  }, [navigation]);
+  }, [navigation, dispatch]);
 
   return (
     <Container>
@@ -120,7 +133,7 @@ const SignUp: React.FunctionComponent = () => {
               formRef.current?.submitForm();
             }}
           >
-            Cadastrar
+            {loadingSignUpRequest ? 'Carregando...' : 'Cadastrar'}
           </Button>
         </Form>
 
