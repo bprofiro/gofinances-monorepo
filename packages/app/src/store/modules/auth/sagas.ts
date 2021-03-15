@@ -33,8 +33,6 @@ export function* signOut({
 }: ActionType<typeof actions.signOutRequest>) {
   const { token, user } = payload;
 
-  console.log(user, token, 'Cheguei aqui');
-
   yield put(
     actions.signOutSuccess({
       user: null,
