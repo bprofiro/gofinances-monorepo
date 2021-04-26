@@ -60,10 +60,7 @@ const SignIn: React.FunctionComponent = () => {
 
       dispatch(authRequest({ email: data.email, password: data.password }));
 
-      Alert.alert(
-        'Sucesso',
-      );
-      navigation.navigate('Listing');
+      navigation.navigate('Transaction');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
