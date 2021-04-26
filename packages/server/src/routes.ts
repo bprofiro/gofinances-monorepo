@@ -97,10 +97,12 @@ routes.post('/products/users/', async (request, response) => {
   const {
     name, price, quantity, code, id: userId,
   } = request.body;
+  console.log({ request: request.body });
 
   try {
     const createProductService = new CreateProductService(
       productRepository,
+      transactionRepository,
     );
 
     const product = await createProductService.execute({
@@ -110,9 +112,11 @@ routes.post('/products/users/', async (request, response) => {
       code,
       user_id: userId,
     });
+    console.log({ product });
 
     return response.json(product);
   } catch (err) {
+    console.log(err);
     return response.status(400).json({ error: err.message });
   }
 });

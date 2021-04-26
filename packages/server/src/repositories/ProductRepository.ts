@@ -22,6 +22,8 @@ class ProductRepository {
       user_id: userId,
     });
 
+    console.log({ productRepositoy: product });
+
     this.products.push(product);
 
     return product;

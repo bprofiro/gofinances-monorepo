@@ -26,12 +26,16 @@ interface InputRef {
 }
 
 const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
-  { name, icon, containerStyles = {}, ...rest },
+  {
+    name, icon, containerStyles = {}, ...rest
+  },
   ref,
 ) => {
   const inputElementRef = useRef<any>(null);
 
-  const { registerField, defaultValue = '', fieldName, error } = useField(name);
+  const {
+    registerField, defaultValue = '', fieldName, error,
+  } = useField(name);
 
   const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
 

@@ -7,8 +7,9 @@ class CreateProduct {
 
   private transactionRepository: TransactionRepository;
 
-  constructor(transactionRepository: ProductRepository) {
-    this.productRepository = transactionRepository;
+  constructor(productRepository: ProductRepository, transactionRepository: TransactionRepository) {
+    this.productRepository = productRepository;
+    this.transactionRepository = transactionRepository;
   }
 
   public async execute({
@@ -18,8 +19,12 @@ class CreateProduct {
     quantity,
     user_id: userId,
   }: Omit<Product, 'id'>): Promise<Product> {
+    console.log({
+      name, price, code, quantity,
+    });
     const checkExistingProduct = await this.productRepository.findByCode(code);
 
+    console.log({ checkExistingProduct });
     await this.transactionRepository.create({
       title: name,
       type: 'outcome',
@@ -42,6 +47,7 @@ class CreateProduct {
       user_id: userId,
     });
 
+    console.log({ productService: product });
     return product;
   }
 }

@@ -1,3 +1,4 @@
 import getValidationErrors from './getValidationErrors';
+import formatCurrency from './formatCurrency';
 
-export { getValidationErrors };
+export { getValidationErrors, formatCurrency };
