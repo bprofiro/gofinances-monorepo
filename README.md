@@ -29,8 +29,9 @@
 	Concluído 🚀
 </h4>
 
-Tabela de conteúdos
-=================
+<h4 align="center">
+	<img alt="App Gofinances" src="https://user-images.githubusercontent.com/59852846/116485628-0f300a00-a862-11eb-8270-42053840a5c0.gif">
+</h4>
 
 ## 💻 Sobre o projeto
 
