@@ -49,6 +49,6 @@ describe('CreateProduct', () => {
         price: 100,
         quantity: 1,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).toBe('E-mail and password combination is wrong');
   });
 });

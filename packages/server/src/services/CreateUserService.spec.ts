@@ -38,6 +38,6 @@ describe('CreateUser', () => {
         password: '123456',
         balance: 0,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).toBe('E-mail and password combination is wrong');
   });
 });

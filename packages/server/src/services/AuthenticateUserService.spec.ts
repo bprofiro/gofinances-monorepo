@@ -2,17 +2,14 @@ import FakeUsersRepository from '../repositories/UserRepository';
 import AuthenticateUserService from './AuthenticateUserService';
 
 let fakeUsersRepository: FakeUsersRepository;
-let fakeHashProvider: FakeHashProvider;
 let authenticateUser: AuthenticateUserService;
 
 describe('AuthenticateUser', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
-    fakeHashProvider = new FakeHashProvider();
 
     authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
-      fakeHashProvider,
     );
   });
 
@@ -21,6 +18,7 @@ describe('AuthenticateUser', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
+      balance: 0,
     });
 
     const response = await authenticateUser.execute({
@@ -38,7 +36,7 @@ describe('AuthenticateUser', () => {
         email: 'johndoe@example.com',
         password: '123456',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).toBe('E-mail and password combination is wrong');
   });
 
   it('should NOT be able to authenticate with a wrong password', async () => {
@@ -46,6 +44,7 @@ describe('AuthenticateUser', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
+      balance: 0,
     });
 
     await expect(
@@ -53,6 +52,6 @@ describe('AuthenticateUser', () => {
         email: 'johndoe@example.com',
         password: 'wrongpassword',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).toBe('E-mail and password combination is wrong');
   });
 });

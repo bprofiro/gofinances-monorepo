@@ -45,6 +45,6 @@ describe('CreateTransaction', () => {
         user_id: 'user-id',
         value: 100,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).toBe('E-mail and password combination is wrong');
   });
 });
