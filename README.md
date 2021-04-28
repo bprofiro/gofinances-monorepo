@@ -58,6 +58,12 @@ Sobre as suas funcionalidades, o GoFinances tem o propósito de ajudar pequenas 
 Você pode conferir o layout da aplicação entrando nesse <a href="https://www.figma.com/file/xbAzaw3IPWZ6z8nNiMB7OA/GoFinances?node-id=28896%3A314">link do Figma</a>
 
 ---
+## Cobertura de testes
+
+<img src="https://user-images.githubusercontent.com/59852846/116485975-f3793380-a862-11eb-8be3-76c59abb3b01.jpeg" alt="Coverage de testes" />
+
+
+---
 
 ## 🛠 Tecnologias
 
